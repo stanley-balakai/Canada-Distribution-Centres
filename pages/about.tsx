@@ -64,16 +64,6 @@ const About: React.FC = () => {
 
         </div>
       </div>
-      <div className="container mx-auto px-4 py-16">
-    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 mt-8 text-center text-grey-blue">Who We Are</h1>
-    <div className="text-lg leading-relaxed space-y-6 max-w-3xl mx-auto p-8 bg-gray-200 rounded-lg">
-
-
-
-    </div>
-
-
-    </div>
 
     </div>
   );
