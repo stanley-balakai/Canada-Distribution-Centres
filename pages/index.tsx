@@ -6,7 +6,7 @@ const Index: React.FC = () => {
   const cards = [
     {
       title: 'Location',
-      description: '665 Dundas St E, Belleville, ON K8N 5V9',
+      description: ' located at 665 Dundas St E, Belleville, ON K8N 5V9, Canada. Our 100,000 square foot facility is conveniently located in the heart of the city, and offers easy access to major highways and transportation routes. ',
       imageURL: '/WH4.jpg',
     },
     {
