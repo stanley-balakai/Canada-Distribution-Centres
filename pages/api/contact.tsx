@@ -11,8 +11,6 @@ interface RecaptchaResponse {
   'error-codes'?: string[];
 }
 
-
-
 if (process.env.SENDGRID_API_KEY) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 }
@@ -24,19 +22,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const { name, email, message, recaptchaToken } = req.body;
 
+  console.log('recaptchaToken:', recaptchaToken);
 
   // Verify the reCAPTCHA token
   const response = (await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`, {
     method: 'POST',
   })) as Response;
-  
+
   const recaptchaData = await response.json() as RecaptchaResponse;
-  
+
+  console.log('recaptchaResponse:', response);
+  console.log('recaptchaData:', recaptchaData);
+
   if (!recaptchaData.success) {
     return res.status(400).json({ message: 'reCAPTCHA verification failed.' });
   }
-  
-  
 
   try {
     // Connect to the MySQL database
