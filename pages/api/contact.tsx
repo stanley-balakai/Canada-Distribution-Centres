@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import mysql from 'mysql2/promise';
 import sgMail from '@sendgrid/mail';
+import fetch from 'node-fetch';
 
 if (process.env.SENDGRID_API_KEY) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -11,7 +12,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  const { name, email, message } = req.body;
+  const { name, email, message, recaptchaToken } = req.body;
+
+  // Verify the reCAPTCHA token
+  const recaptchaRes = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`, {
+    method: 'POST',
+  });
+  const recaptchaData: any = await recaptchaRes.json();
+
+  if (!recaptchaData.success) {
+    return res.status(400).json({ message: 'Failed reCAPTCHA verification. Please try again.' });
+  }
 
   try {
     // Connect to the MySQL database

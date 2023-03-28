@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Head from 'next/head';
+import { useEffect } from 'react';
 
 const Contact: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
+  const [recaptchaToken, setRecaptchaToken] = useState('');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'grecaptcha' in window) {
+      (window as any).grecaptcha.ready(async () => {
+        const token = await (window as any).grecaptcha.execute('6Lc8zjwlAAAAAI5c0xOO4jBhvBb89MQjTknlUNYt', { action: 'contact_form' });
+        setRecaptchaToken(token);
+      });
+    }
+  }, []);
+  
+  
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,8 +30,9 @@ const Contact: React.FC = () => {
     const response = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, message }),
+      body: JSON.stringify({ name, email, message, recaptchaToken }),
     });
+    
 
     const data = await response.json();
 
@@ -35,8 +50,10 @@ const Contact: React.FC = () => {
     <div className="bg-eggshell-white min-h-screen">
       <Header />
       <Head>
-          <title>Canada Distribution Centres - Contact Us</title>
+        <title>Canada Distribution Centres - Contact Us</title>
+        <script src={`https://www.google.com/recaptcha/api.js?render=6Lc8zjwlAAAAAI5c0xOO4jBhvBb89MQjTknlUNYt`}></script>
       </Head>
+
       <div className="container mx-auto px-4 py-16">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 mt-8 text-center text-grey-blue">Contact Us</h1>
         <div className="text-lg leading-relaxed space-y-6 max-w-3xl mx-auto p-8 bg-gray-200 rounded-lg">
@@ -88,9 +105,13 @@ const Contact: React.FC = () => {
               required
             />
           </div>
-          <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded">
-            Submit
-          </button>
+          <button
+            type="submit"
+            disabled={!recaptchaToken}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded"
+          >
+          Submit
+        </button>
         </form>
         {status && <p className="mt-4 text-lg">{status}</p>}
 
