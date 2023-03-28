@@ -1,38 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Canada Distribution Centres  🚛
+===============================
 
-## Getting Started
+Canada Distribution Centres is a web application built using Next.js, Tailwind CSS, and TypeScript. It features a responsive design with a clean and modern user interface, providing an excellent user experience across various devices.
+Features
 
-First, run the development server:
+* Home, About, Pricing, and Contact pages
+* Mobile-friendly navigation with a dropdown menu
+* Contact form with reCAPTCHA Enterprise integration for spam prevention
+* Connection to a MySQL database hosted on Amazon RDS for storing contact form submissions
+    
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### Technologies Used 🛠
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* **Next.js**: React framework for server-rendered applications
+* **Tailwind CSS**: Utility-first CSS framework for rapidly building custom designs
+* **TypeScript**: Typed superset of JavaScript that adds static types
+* **MySQL**: Open-source relational database management system
+* **Amazon RDS**: Managed relational database service that makes it easy to set up, operate, and scale a relational database in the cloud
+    Various API integrations for added functionality
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Project Details 🗒
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+This project showcases a range of modern web development skills and demonstrates the ability to create an attractive and user-friendly website. The site offers a seamless experience for users, with smooth transitions between pages and a mobile-first design. The contact form is an essential feature, allowing users to get in touch with the business.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+By connecting to a MySQL database hosted on Amazon RDS, the project demonstrates expertise in managing cloud-based database services and maintaining a secure and efficient backend. The use of various API integrations throughout the application highlights the ability to work with third-party services and create a cohesive user experience.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The project is built using best practices for modern web development, including the use of Next.js for server-rendered applications, TypeScript for improved code reliability, and Tailwind CSS for rapid, responsive design creation. The code is organized and structured to allow for easy maintenance and future expansion.
 
-## Learn More
+### See It In Action 💫
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[Click me!](https://canadadistributioncentres.com/)
