@@ -15,6 +15,7 @@ const Contact: React.FC = () => {
       (window as any).grecaptcha.ready(async () => {
         const token = await (window as any).grecaptcha.execute('6Lc8zjwlAAAAAI5c0xOO4jBhvBb89MQjTknlUNYt', { action: 'contact_form' });
         setRecaptchaToken(token);
+        console.log("reCAPTCHA token:", token);
       });
     }
   }, []);

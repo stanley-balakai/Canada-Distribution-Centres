@@ -2,6 +2,16 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import mysql from 'mysql2/promise';
 import sgMail from '@sendgrid/mail';
 import fetch from 'node-fetch';
+import type { Response } from 'node-fetch';
+
+interface RecaptchaResponse {
+  success: boolean;
+  challenge_ts: string;
+  hostname: string;
+  'error-codes'?: string[];
+}
+
+
 
 if (process.env.SENDGRID_API_KEY) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -14,15 +24,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const { name, email, message, recaptchaToken } = req.body;
 
-  // Verify the reCAPTCHA token
-  const recaptchaRes = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`, {
-    method: 'POST',
-  });
-  const recaptchaData: any = await recaptchaRes.json();
 
+  // Verify the reCAPTCHA token
+  const response = (await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`, {
+    method: 'POST',
+  })) as Response;
+  
+  const recaptchaData = await response.json() as RecaptchaResponse;
+  
   if (!recaptchaData.success) {
-    return res.status(400).json({ message: 'Failed reCAPTCHA verification. Please try again.' });
+    return res.status(400).json({ message: 'reCAPTCHA verification failed.' });
   }
+  
+  
 
   try {
     // Connect to the MySQL database
