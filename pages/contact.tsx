@@ -61,7 +61,7 @@ const Contact: React.FC = () => {
           <p className="text-center">
             <span className="font-bold">Canada Distribution Centres</span>
             <br/>
-            <span className="font-bold">Call Us At:</span> (613) 967-2900
+            <span className="font-bold">Call Us At:</span> (416) 823-6899
             <br/>
             <span className="font-bold">Email Us At:</span> info@canadadistributioncentres.com
             <br/>
